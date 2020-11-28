@@ -22,3 +22,5 @@ for record in sg:
         print()
     except ClientError as e:
         print(e)
+        
+os.remove("sg.id_list")
