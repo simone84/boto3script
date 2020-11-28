@@ -50,3 +50,6 @@ Thumbs.db
 
 # Additional crap
 .sonarlint/
+
+# Additional text
+*_list
