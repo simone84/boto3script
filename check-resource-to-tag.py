@@ -5,6 +5,7 @@ import sys
 import os
 from botocore.exceptions import ClientError
 ec2 = boto3.resource('ec2')
+#tags_dictionary(Tags=[{'Key': 'Boto3', 'Value': 'True'}, {'Key': 'TagAutoApply', 'Value': 'True'}])
 
 # Security-groups
 security_group = ec2.SecurityGroup('id')
@@ -15,18 +16,7 @@ for record in sg:
         record = record.rstrip("\n")
         sg_description = ec2.SecurityGroup(record)
         print("Adding tags on SecurityGroup:", record)
-        sg_description.create_tags(
-            Tags=[
-                    {
-                    'Key': 'Boto3',
-                    'Value': 'True'
-                    },
-                    {
-                    'Key': 'TagAutoapply',
-                    'Value': 'True'
-                    }
-            ]
-        )
+        sg_description.create_tags(Tags=[{'Key': 'Boto3', 'Value': 'True'}, {'Key': 'TagAutoApply', 'Value': 'True'}])
     except ClientError as e:
         print(e)
 os.remove("sg-id_list")
@@ -40,18 +30,7 @@ for record in vpc:
         record = record.rstrip("\n")
         vpc_description = ec2.Vpc(record)
         print("Adding tags on VPC:", record)
-        vpc_description.create_tags(
-            Tags=[
-                    {
-                    'Key': 'Boto3',
-                    'Value': 'True'
-                    },
-                    {
-                    'Key': 'TagAutoapply',
-                    'Value': 'True'
-                    }
-            ]
-        )
+        vpc_description.create_tags(Tags=[{'Key': 'Boto3', 'Value': 'True'}, {'Key': 'TagAutoApply', 'Value': 'True'}])
     except ClientError as e:
         print(e)
 os.remove("vpc-id_list")
