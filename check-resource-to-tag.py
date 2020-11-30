@@ -21,7 +21,7 @@ for record in sg:
         print(e)
 os.remove("sg-id_list")
 
-# VPC
+# VPCs
 vpc = ec2.Vpc('id')
 os.system('aws ec2 describe-vpcs --query "Vpcs[*].[VpcId]" --output text > vpc-id_list')
 vpc = open("vpc-id_list", "r")
@@ -34,3 +34,17 @@ for record in vpc:
     except ClientError as e:
         print(e)
 os.remove("vpc-id_list")
+
+# Subnets
+subnet = ec2.Subnet('id')
+os.system('aws ec2 describe-subnets --query "Subnets[*].[SubnetId]" --output text > subnet-id_list')
+subnet = open("subnet-id_list", "r")
+for record in subnet:
+    try:
+        record = record.rstrip("\n")
+        subnet_description = ec2.Subnet(record)
+        print("Adding tags on Subnet:", record)
+        subnet_description.create_tags(Tags=tags_dictionary)
+    except ClientError as e:
+        print(e)
+os.remove("subnet-id_list")
