@@ -3,7 +3,7 @@
 ## TAGS ##
 * check-resource-to-tag.py [SG/VPC/SUBNET]
 
-## Security groups ##
+## Security group ##
 * sec-group-del.py
 * sec-group-describe.py
 * sec-group-parsing.py
@@ -13,3 +13,6 @@
 
 ## Subnet ##
 * subnet-describe.py
+
+## InternetGateway ##
+* igw-describe.py
