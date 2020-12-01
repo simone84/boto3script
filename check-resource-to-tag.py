@@ -48,3 +48,17 @@ for record in subnet:
     except ClientError as e:
         print(e)
 os.remove("subnet-id_list")
+
+# IGWs
+subnet = ec2.InternetGateway('id')
+os.system('aws ec2 describe-internet-gateways --query "InternetGateways[*].[InternetGatewayId]" --output text > igw-id_list')
+igw = open("igw-id_list", "r")
+for record in igw:
+    try:
+        record = record.rstrip("\n")
+        igw_description = ec2.InternetGateway(record)
+        print("Adding tags on InternetGateway:", record)
+        igw_description.create_tags(Tags=tags_dictionary)
+    except ClientError as e:
+        print(e)
+os.remove("igw-id_list")
