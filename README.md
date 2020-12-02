@@ -1,7 +1,7 @@
 # Useful script for AWS #
 
 ## TAGS ##
-* check-resource-to-tag.py [SG/VPC/SUBNET]
+* check-resource-to-tag.py [SG/VPC/SUBNET/IGW/ACL]
 
 ## Security group ##
 * sec-group-del.py

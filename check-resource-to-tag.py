@@ -62,3 +62,17 @@ for record in igw:
     except ClientError as e:
         print(e)
 os.remove("igw-id_list")
+
+# IGWs
+subnet = ec2.InternetGateway('id')
+os.system('aws ec2 describe-network-acls --query "NetworkAcls[*].[NetworkAclId]" --output text > acl-id_list')
+acl = open("acl-id_list", "r")
+for record in acl:
+    try:
+        record = record.rstrip("\n")
+        acl_description = ec2.NetworkAcl(record)
+        print("Adding tags on NetworkACL:", record)
+        acl_description.create_tags(Tags=tags_dictionary)
+    except ClientError as e:
+        print(e)
+os.remove("acl-id_list")
