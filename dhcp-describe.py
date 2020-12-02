@@ -16,7 +16,7 @@ for record in dhcp:
     try:
         record = record.rstrip("\n")
         dhcp_description = ec2.DhcpOptions(record)
-        print("DHCP-ID:", record, "with this conf:", dhcp_description.dhcp_configurations)
+        print("ID:", record, dhcp_description.dhcp_configurations[0],"\n","                ", dhcp_description.dhcp_configurations[1])
     except ClientError as e:
         print(e)
 
