@@ -8,7 +8,6 @@ ec2 = boto3.resource('ec2')
 tags_dictionary = [{'Key': 'Boto3', 'Value': 'True'}, {'Key': 'TagAutoApply', 'Value': 'True'}]
 
 # Security-groups
-security_group = ec2.SecurityGroup('id')
 os.system('aws ec2 describe-security-groups --query "SecurityGroups[*].[GroupId]" --output text > sg-id_list')
 sg = open("sg-id_list", "r")
 for record in sg:
@@ -22,7 +21,6 @@ for record in sg:
 os.remove("sg-id_list")
 
 # VPCs
-vpc = ec2.Vpc('id')
 os.system('aws ec2 describe-vpcs --query "Vpcs[*].[VpcId]" --output text > vpc-id_list')
 vpc = open("vpc-id_list", "r")
 for record in vpc:
@@ -36,7 +34,6 @@ for record in vpc:
 os.remove("vpc-id_list")
 
 # Subnets
-subnet = ec2.Subnet('id')
 os.system('aws ec2 describe-subnets --query "Subnets[*].[SubnetId]" --output text > subnet-id_list')
 subnet = open("subnet-id_list", "r")
 for record in subnet:
@@ -50,7 +47,6 @@ for record in subnet:
 os.remove("subnet-id_list")
 
 # IGWs
-subnet = ec2.InternetGateway('id')
 os.system('aws ec2 describe-internet-gateways --query "InternetGateways[*].[InternetGatewayId]" --output text > igw-id_list')
 igw = open("igw-id_list", "r")
 for record in igw:
@@ -64,7 +60,6 @@ for record in igw:
 os.remove("igw-id_list")
 
 # NetworkACLs
-subnet = ec2.InternetGateway('id')
 os.system('aws ec2 describe-network-acls --query "NetworkAcls[*].[NetworkAclId]" --output text > acl-id_list')
 acl = open("acl-id_list", "r")
 for record in acl:
@@ -76,3 +71,16 @@ for record in acl:
     except ClientError as e:
         print(e)
 os.remove("acl-id_list")
+
+# DhcpOptions
+os.system('aws ec2 describe-dhcp-options --query "DhcpOptions[*].[DhcpOptionsId]" --output text > dhcp-id_list')
+dhcp = open("dhcp-id_list", "r")
+for record in dhcp:
+    try:
+        record = record.rstrip("\n")
+        dhcp_description = ec2.DhcpOptions(record)
+        print("Adding tags on DhcpOptions:", record)
+        dhcp_description.create_tags(Tags=tags_dictionary)
+    except ClientError as e:
+        print(e)
+os.remove("dhcp-id_list")
