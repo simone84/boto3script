@@ -15,8 +15,8 @@ print("RouteTable List:")
 for record in routetable:
     try:
         record = record.rstrip("\n")
-        routetable = ec2.RouteTable(record)
-        print(routetable.routes)
+        route_table = ec2.RouteTable(record)
+        print(route_table.routes)
     except ClientError as e:
         print(e)
 
