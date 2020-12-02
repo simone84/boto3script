@@ -22,3 +22,6 @@
 
 ## Route Table ##
 * route-table-describe.py
+
+## DHCP-Options ##
+* dhcp-describe.py

@@ -63,7 +63,7 @@ for record in igw:
         print(e)
 os.remove("igw-id_list")
 
-# IGWs
+# NetworkACLs
 subnet = ec2.InternetGateway('id')
 os.system('aws ec2 describe-network-acls --query "NetworkAcls[*].[NetworkAclId]" --output text > acl-id_list')
 acl = open("acl-id_list", "r")
