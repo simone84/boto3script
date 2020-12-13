@@ -4,6 +4,7 @@ import boto3
 import sys
 import os
 from botocore.exceptions import ClientError
+
 ec2 = boto3.resource('ec2')
 tags_dictionary = [{'Key': 'Boto3', 'Value': 'True'}, {'Key': 'TagAutoApply', 'Value': 'True'}]
 
