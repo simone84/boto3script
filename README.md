@@ -7,6 +7,7 @@
 * sec-group-del.py
 * sec-group-describe.py
 * sec-group-parsing.py
+* sec-group-delete-if.py
 
 ## VPC ##
 * vpc-describe.py
